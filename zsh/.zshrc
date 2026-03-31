@@ -10,11 +10,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
 
-plugins=(
-  git
-  fzf
-  zoxide
-)
+# plugins=()
 
 source $ZSH/oh-my-zsh.sh
 
@@ -83,15 +79,15 @@ export NVM_DIR="$HOME/.nvm"
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-# Starship
+# Starship - prompt customizer
 eval "$(starship init zsh)"
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
 
-# Fuzzy search
+# Fzf - fuzzy finder
 export FZF_DEFAULT_OPTS="--height 40% --reverse"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# Yazi
+# Yazi - file explorer
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
 	command yazi "$@" --cwd-file="$tmp"
@@ -106,6 +102,9 @@ eval "$(atuin init zsh)"
 # Direnv - per-directory environment variables
 eval "$(direnv hook zsh)"
 
+# Zoxide - smarter cd
+eval "$(zoxide init zsh)"
+
 # Nix package manager (uncomment when ready to use)
 # export NIX_CONF_DIR=$HOME/.config/nix
 # if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
@@ -113,9 +112,9 @@ eval "$(direnv hook zsh)"
 # fi
 # Install: sh <(curl -L https://nixos.org/nix/install)
 
-# ZSH plugins
+# ZSH - autosuggestions and syntax highlighting
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# Broot
+# Broot - file explorer
 source "$HOME/.config/broot/launcher/bash/br"
