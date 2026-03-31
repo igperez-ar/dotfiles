@@ -1,13 +1,16 @@
 #!/usr/bin/env bash
-set -e
+set -euo pipefail
 
-DOTFILES="$HOME/dotfiles"
+DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+TPM_DIR="$HOME/.tmux/plugins/tpm"
 
 backup="$HOME/.dotfiles-backup/$(date +%Y%m%d_%H%M%S)"
 mkdir -p "$backup"
 
 move_if_exists() {
-  [ -e "$1" ] && [ ! -L "$1" ] && mv "$1" "$backup/"
+  if [ -e "$1" ] && [ ! -L "$1" ]; then
+    mv "$1" "$backup/"
+  fi
 }
 
 paths=(
@@ -25,5 +28,11 @@ done
 cd "$DOTFILES"
 stow zsh tmux nvim starship
 
+if [ ! -d "$TPM_DIR" ]; then
+  mkdir -p "$(dirname "$TPM_DIR")"
+  git clone https://github.com/tmux-plugins/tpm "$TPM_DIR"
+fi
+
 echo "✔ Dotfiles installed"
 echo "📦 Backup en: $backup"
+echo "✔ TPM installed in: $TPM_DIR"
