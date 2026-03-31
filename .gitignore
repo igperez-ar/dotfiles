@@ -3,3 +3,6 @@ tmux/plugins/
 raycast
 fzf
 history.txt
+zsh/*
+!zsh/.zshenv.example
+!zsh/.zshrc
