@@ -67,8 +67,8 @@ export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 # Ruby version manager
-# export PATH="$HOME/.rbenv/bin:$PATH"
-# eval "$(rbenv init -)"
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
 
 # NodeJS version manager
 export NVM_DIR="$HOME/.nvm"
@@ -95,6 +95,9 @@ function y() {
 	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
 	rm -f -- "$tmp"
 }
+
+# Homebrew - package manager
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Atuin - shell history
 eval "$(atuin init zsh)"
